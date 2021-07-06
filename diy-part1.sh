@@ -105,7 +105,7 @@ sed -i "s/# //g" /etc/opkg/distfeeds.conf
 uci set dhcp.@dnsmasq[0].localservice=0
 uci set dhcp.@dnsmasq[0].nonwildcard=0
 uci commit dhcp
-#设置网络
+设置网络
 #uci set network.wan.proto='pppoe'
 #uci set network.wan.username='account'
 #uci set network.wan.password='password'
@@ -116,7 +116,7 @@ uci set network.lan.proto='static'
 uci set network.lan.type='bridge'
 uci set network.lan.ifname='eth0 eth1 eth2'
 uci commit network   
-#DNS重定向
+DNS重定向
 sed -i '/REDIRECT --to-ports 53/d' /etc/firewall.user
 echo "# iptables -t nat -A PREROUTING -p udp --dport 53 -j REDIRECT --to-ports 53" >> /etc/firewall.user
 sed -i '/option disabled/d' /etc/config/wireless
@@ -132,7 +132,7 @@ sed -i 's/LuCI 18.06 Mod by Lienol/LuCI 18.06/g' /usr/lib/lua/luci/version.lua
 # 删除状态页不需显示的
 rm -rf /usr/lib/lua/luci/view/admin_status/index
 #mv -f /usr/lib/lua/luci/view/admin_status/index /usr/lib/lua/luci/view/admin_status/index_backup 2>/dev/null
-#禁用某些可能会自启动且用不上的依赖包服务
+禁用某些可能会自启动且用不上的依赖包服务
 /etc/init.d/php7-fastcgi disable 2>/dev/null
 /etc/init.d/php7-fpm disable 2>/dev/null
 /etc/init.d/softethervpnbridge disable 2>/dev/null
