@@ -19,7 +19,7 @@ echo '修改feeds'
 #sed -i '5s/Lienol/sypopo/g' ./feeds.conf.default
 
 echo '修改网关地址'
-sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
+sed -i 's/192.168.1.1/192.168.5.1/g' package/base-files/files/bin/config_generate
 
 echo '修改时区'
 sed -i "s/'UTC'/'CST-8'\n        set system.@system[-1].zonename='Asia\/Shanghai'/g" package/base-files/files/bin/config_generate
@@ -105,18 +105,18 @@ sed -i "s/# //g" /etc/opkg/distfeeds.conf
 uci set dhcp.@dnsmasq[0].localservice=0
 uci set dhcp.@dnsmasq[0].nonwildcard=0
 uci commit dhcp
-设置网络
-uci set network.wan.proto='pppoe'
-uci set network.wan.username='account'
-uci set network.wan.password='password'
+#设置网络
+#uci set network.wan.proto='pppoe'
+#uci set network.wan.username='account'
+#uci set network.wan.password='password'
 uci set network.wan.ifname='eth3'
 uci set network.wan6.ifname='eth3'
-uci set network.lan.ipaddr='192.168.2.1'
+uci set network.lan.ipaddr='192.168.5.1'
 uci set network.lan.proto='static'
 uci set network.lan.type='bridge'
 uci set network.lan.ifname='eth0 eth1 eth2'
 uci commit network   
-DNS重定向
+#DNS重定向
 sed -i '/REDIRECT --to-ports 53/d' /etc/firewall.user
 echo "# iptables -t nat -A PREROUTING -p udp --dport 53 -j REDIRECT --to-ports 53" >> /etc/firewall.user
 sed -i '/option disabled/d' /etc/config/wireless
